@@ -1,36 +1,175 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Ezra Odyn — Technical Publication & Services
+
+A personal platform with two purposes:
+
+- **Learn from me** — Technical publication with articles on AI, software engineering, cybersecurity, and system design.
+- **Work with us** — Professional tech & creative services including web development, marketing, design, video, and AI.
+
+Built with Next.js 16, React 19, Tailwind CSS 4, and GSAP.
+
+---
+
+## Tech Stack
+
+- **Framework:** Next.js 16 (App Router)
+- **UI:** React 19, Tailwind CSS 4
+- **Animations:** GSAP + ScrollTrigger
+- **Icons:** Lucide React
+- **Fonts:** Space Grotesk + Space Mono
+- **Markdown:** react-markdown + rehype-highlight
+- **Language:** TypeScript
+
+---
 
 ## Getting Started
 
-First, run the development server:
-
 ```bash
+# Install dependencies
+npm install
+
+# Start dev server
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000).
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+---
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Project Structure
 
-## Learn More
+```
+app/
+├── page.tsx                    # Homepage — articles, about
+├── layout.tsx                  # Root layout (fonts, metadata)
+├── globals.css                 # Global styles, prose, animations
+├── [slug]/page.tsx             # Article detail pages
+├── admin/page.tsx              # Article management (passcode protected)
+├── services/page.tsx           # Services landing page
+├── services/[slug]/page.tsx    # Service detail pages
+├── api/articles/route.ts       # Articles CRUD API
+├── api/articles/[id]/route.ts  # Single article API
+└── components/
+    ├── Navigation.tsx          # Adaptive nav (articles vs services)
+    ├── Hero.tsx                # Homepage hero
+    ├── Articles.tsx            # Article grid with search & categories
+    ├── About.tsx               # Author section
+    ├── Footer.tsx              # Site footer
+    ├── AdminGate.tsx           # Admin authentication gate
+    ├── CustomCursor.tsx        # Custom cursor effect
+    └── PixelParticles.tsx      # Background particle animation
 
-To learn more about Next.js, take a look at the following resources:
+data/
+├── articles/                   # Article JSON files (sample data included)
+└── services.ts                 # Service definitions & categories
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+---
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Features
 
-## Deploy on Vercel
+### Publication (`/`)
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- Article listing with category filters and search
+- Featured article highlight
+- Markdown rendering with syntax highlighting
+- Mobile-optimized reading experience
+- Reading time, date, tags, and category metadata
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+### Services (`/services`)
+
+- 5 service categories: Build, Grow, Create, Media, Technology
+- 16 individual service pages with features, deliverables, and process
+- Interactive 5-step quote request form
+- Web development pricing tiers (Starter → Custom)
+- Team section (Ezra Odyn + Mwenda, CEO RedAppleKE)
+- WhatsApp integration with pre-filled messages
+- Contact form with service selection and budget range
+
+### Admin (`/admin`)
+
+- Passcode-protected article management
+- Create, edit, delete articles
+- Markdown editor for content and premium content
+- Draft/publish workflow
+- Category and tag management
+
+**Default credentials:**
+- Email: `ezraakush@gmail.com`
+- Passcode: `Dev#101`
+
+### Paid Content
+
+- Articles can be marked free or premium
+- Premium content is paywalled with a subtle lock
+- Content gated server-side via API (not just CSS/JS hiding)
+- Simple one-time payment model
+
+---
+
+## API Routes
+
+| Method | Route | Description |
+|--------|-------|-------------|
+| `GET` | `/api/articles` | List all articles (supports `?q=search` and `?status=published`) |
+| `POST` | `/api/articles` | Create a new article |
+| `GET` | `/api/articles/[id]` | Get article by ID or slug |
+| `PUT` | `/api/articles/[id]` | Update an article |
+| `DELETE` | `/api/articles/[id]` | Delete an article |
+
+---
+
+## Data
+
+Articles are stored as JSON files in `data/articles/`. Each article includes:
+
+```json
+{
+  "id": "art001",
+  "slug": "article-slug",
+  "title": "Article Title",
+  "description": "Short description",
+  "date": "2025-09-15",
+  "readingTime": "8 MIN",
+  "category": "AI",
+  "tags": ["Tag1", "Tag2"],
+  "content": "Markdown content...",
+  "premiumContent": "Locked content (optional)",
+  "isPremium": false,
+  "price": 9,
+  "status": "published"
+}
+```
+
+Services are defined in `data/services.ts` with full metadata including features, deliverables, complexity levels, and process steps.
+
+---
+
+## Deployment (Vercel)
+
+```bash
+# Build
+npm run build
+
+# Or deploy directly to Vercel
+npx vercel
+```
+
+No special configuration needed. Vercel auto-detects Next.js and handles API routes via serverless functions.
+
+**Note:** The `data/` directory must be committed to git — it contains all articles and service definitions.
+
+---
+
+## Environment
+
+No environment variables required for basic functionality. The project uses:
+
+- File-based article storage (`data/articles/`)
+- Hardcoded service definitions (`data/services.ts`)
+- Client-side session storage for admin auth
+
+---
+
+## License
+
+Private — Ezra Odyn
