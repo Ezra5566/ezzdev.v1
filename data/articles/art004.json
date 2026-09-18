@@ -1,0 +1,13 @@
+{
+  "id": "art004",
+  "slug": "system-design-patterns-for-ai-apis",
+  "title": "System Design Patterns for AI APIs",
+  "description": "Battle-tested patterns for building reliable, scalable AI-powered APIs that don't fall over in production.",
+  "date": "2025-08-28",
+  "readingTime": "10 MIN",
+  "category": "System Design",
+  "tags": ["System Design", "APIs", "Scalability"],
+  "content": "Building an AI API that works in a demo is easy. Building one that handles 10k requests per minute without melting is a different discipline entirely. Here are the patterns I've learned from building AI APIs at scale.\n\n## Pattern 1: The Circuit Breaker\n\nAI model APIs are inherently unreliable. They have rate limits, occasional timeouts, and variable latency. Your system needs to handle this gracefully.\n\n```typescript\nclass AICircuitBreaker {\n  private failures = 0;\n  private state: 'closed' | 'open' | 'half-open' = 'closed';\n  \n  async call<T>(fn: () => Promise<T>): Promise<T> {\n    if (this.state === 'open') {\n      throw new Error('Circuit is open');\n    }\n    \n    try {\n      const result = await fn();\n      this.failures = 0;\n      this.state = 'closed';\n      return result;\n    } catch (error) {\n      this.failures++;\n      if (this.failures >= 5) {\n        this.state = 'open';\n        setTimeout(() => this.state = 'half-open', 30000);\n      }\n      throw error;\n    }\n  }\n}\n```\n\n## Pattern 2: Response Streaming\n\nFor AI APIs, streaming isn't just nice to have — it's essential for user experience. But streaming introduces its own challenges around error handling and partial responses.\n\nThe key insight: **always buffer a minimum response before streaming**. This gives you a window to catch errors before they reach the client.\n\n## Pattern 3: Token Budget Management\n\nEvery API request has a token budget. Track it aggressively:\n\n- Set hard limits per request\n- Monitor average token usage per endpoint\n- Alert when usage trends upward (usually indicates a prompt degradation)\n- Implement token counting at the edge, not the model layer\n\n## Pattern 4: Graceful Degradation\n\nWhen your primary model is slow or unavailable, fall back gracefully:\n\n1. Primary model → 2. Smaller/faster model → 3. Cached response → 4. Error with explanation\n\nNever show the user a raw error. Always provide something useful.\n\n## Pattern 5: Idempotency\n\nAI API calls should be idempotent. Use request IDs to prevent duplicate processing and enable safe retries.\n\nThese patterns have saved my production systems more times than I can count. Start with them, and you'll avoid the most common failure modes.",
+  "isPremium": false,
+  "status": "published"
+}

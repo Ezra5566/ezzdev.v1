@@ -1,0 +1,13 @@
+{
+  "id": "art005",
+  "slug": "cybersecurity-blind-spots-developers",
+  "title": "Cybersecurity Blind Spots Every Developer Has",
+  "description": "The security vulnerabilities that live in your code right now — and how to think about them before someone else does.",
+  "date": "2025-08-20",
+  "readingTime": "7 MIN",
+  "category": "Cybersecurity",
+  "tags": ["Security", "Best Practices", "Web Development"],
+  "content": "I've reviewed hundreds of codebases over the past few years, and the same security blind spots appear everywhere. Here are the ones that trip up even experienced developers.\n\n## 1. Client-Side Trust\n\nThe most dangerous assumption in web development: **never trust the client**. Every validation you do on the frontend is a UX feature, not a security feature.\n\n```javascript\n// This is NOT security\nif (userInput.length > 100) {\n  alert('Input too long');\n  return;\n}\n\n// This IS security\nif (req.body.input.length > 100) {\n  return res.status(400).json({ error: 'Input too long' });\n}\n```\n\n## 2. Secret Management\n\nDevelopers leak secrets in the most unexpected places:\n- Git history (even after deletion)\n- Error logs\n- Client-side bundles\n- Environment variable dumps in debug mode\n- Docker images\n\nUse a proper secrets manager. Rotate keys regularly. Audit your git history.\n\n## 3. Authentication ≠ Authorization\n\nJust because a user is authenticated doesn't mean they're authorized to access a resource. I see this bug in nearly every codebase:\n\n```typescript\n// WRONG: Only checks authentication\napp.get('/api/user/:id', authenticate, (req, res) => {\n  const user = db.getUser(req.params.id);\n  res.json(user);\n});\n\n// RIGHT: Checks both auth AND authorization\napp.get('/api/user/:id', authenticate, authorize('read:user'), (req, res) => {\n  const user = db.getUser(req.params.id);\n  res.json(user);\n});\n```\n\n## 4. Dependency Vulnerabilities\n\nYour dependencies are your attack surface. Run `npm audit` regularly. Set up automated alerts. Don't ignore warnings because \"it's just a dev dependency\" — dev dependencies get bundled in production builds more often than you think.\n\n## 5. Input Sanitization\n\nSQL injection is so 2010, right? Wrong. It's still one of the most common vulnerabilities. And NoSQL injection is its equally dangerous cousin.\n\n**Use parameterized queries. Always. No exceptions.**\n\nThe best security mindset is paranoia combined with systematic thinking. Assume everything is a vulnerability until proven otherwise.",
+  "isPremium": false,
+  "status": "published"
+}
