@@ -1338,6 +1338,8 @@ export interface TeamMember {
   role: string;
   description: string;
   initials: string;
+  link?: string;
+  linkLabel?: string;
 }
 
 export const teamMembers: TeamMember[] = [
@@ -1347,6 +1349,8 @@ export const teamMembers: TeamMember[] = [
     description:
       "Full-stack developer specializing in AI, web development, and system architecture. Self-taught, curious, and practical.",
     initials: "EO",
+    link: "https://ezraodyn.vercel.app/about",
+    linkLabel: "Who am I?",
   },
   {
     name: "Mwenda",
@@ -1354,5 +1358,7 @@ export const teamMembers: TeamMember[] = [
     description:
       "Business strategy, client relations, and operations. Leading RedAppleKE's vision for digital transformation.",
     initials: "MW",
+    link: "https://redappleke.com",
+    linkLabel: "RedAppleKE",
   },
 ];

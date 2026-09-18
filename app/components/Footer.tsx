@@ -1,6 +1,6 @@
 "use client";
 
-import { Github, Twitter, Rss, MessageCircle } from "lucide-react";
+import { Github, Instagram, Rss, MessageCircle } from "lucide-react";
 import Link from "next/link";
 
 interface FooterLink {
@@ -45,8 +45,8 @@ const footerSections: FooterSection[] = [
   {
     title: ".CONNECT",
     links: [
-      { label: "GitHub", href: "https://github.com", external: true },
-      { label: "Twitter", href: "https://twitter.com", external: true },
+      { label: "GitHub", href: "https://github.com/Ezra5566", external: true },
+      { label: "Instagram", href: "https://instagram.com/typical_ezy", external: true },
       { label: "RSS Feed", href: "#" },
     ],
   },
@@ -110,7 +110,7 @@ export default function Footer() {
             <div className="flex flex-wrap items-center justify-start md:justify-end gap-6">
               <div className="flex gap-4">
                 <a
-                  href="https://github.com"
+                  href="https://github.com/Ezra5566"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="font-mono text-[10px] text-[#737373] hover:text-[#a3e635] transition-colors tracking-widest flex items-center gap-1"
@@ -119,13 +119,13 @@ export default function Footer() {
                   GITHUB
                 </a>
                 <a
-                  href="https://twitter.com"
+                  href="https://instagram.com/typical_ezy"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="font-mono text-[10px] text-[#737373] hover:text-[#a3e635] transition-colors tracking-widest flex items-center gap-1"
                 >
-                  <Twitter size={12} />
-                  TWITTER
+                  <Instagram size={12} />
+                  INSTAGRAM
                 </a>
                 <a
                   href="#"

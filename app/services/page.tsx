@@ -865,6 +865,16 @@ export default function ServicesPage() {
                       <p className="text-xs text-[#737373] font-light leading-relaxed">
                         {member.description}
                       </p>
+                      {member.link && (
+                        <a
+                          href={member.link}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="font-mono text-[10px] text-[#a3e635] hover:text-[#bef264] tracking-widest mt-3 inline-flex items-center gap-1 transition-colors"
+                        >
+                          {member.linkLabel || 'Learn more'} →
+                        </a>
+                      )}
                     </div>
                   </div>
                 </div>

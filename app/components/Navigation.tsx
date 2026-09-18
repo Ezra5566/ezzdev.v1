@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { Menu, X, Github, Twitter } from "lucide-react";
+import { Menu, X, Github, Instagram } from "lucide-react";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
 
@@ -87,7 +87,7 @@ export default function Navigation() {
           {/* Right Side */}
           <div className="hidden lg:flex items-center gap-4">
             <a
-              href="https://github.com"
+              href="https://github.com/Ezra5566"
               target="_blank"
               rel="noopener noreferrer"
               className="text-[#737373] hover:text-white transition-colors"
@@ -95,12 +95,12 @@ export default function Navigation() {
               <Github size={18} />
             </a>
             <a
-              href="https://twitter.com"
+              href="https://instagram.com/typical_ezy"
               target="_blank"
               rel="noopener noreferrer"
               className="text-[#737373] hover:text-white transition-colors"
             >
-              <Twitter size={18} />
+              <Instagram size={18} />
             </a>
             <Link
               href="/services#contact"
@@ -153,7 +153,7 @@ export default function Navigation() {
           </Link>
           <div className="flex gap-4 pt-4 border-t border-[#262626]">
             <a
-              href="https://github.com"
+              href="https://github.com/Ezra5566"
               target="_blank"
               rel="noopener noreferrer"
               className="text-[#737373] hover:text-white transition-colors"
@@ -161,12 +161,12 @@ export default function Navigation() {
               <Github size={24} />
             </a>
             <a
-              href="https://twitter.com"
+              href="https://instagram.com/typical_ezy"
               target="_blank"
               rel="noopener noreferrer"
               className="text-[#737373] hover:text-white transition-colors"
             >
-              <Twitter size={24} />
+              <Instagram size={24} />
             </a>
           </div>
         </div>
