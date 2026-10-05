@@ -61,6 +61,9 @@ app/
 data/
 ├── articles/                   # Article JSON files (sample data included)
 └── services.ts                 # Service definitions & categories
+
+public/hairline/                 # Self-contained figure pages, one per article
+hairline-figures/                # Figure sources (.js) + look sheets (.png)
 ```
 
 ---
@@ -74,6 +77,7 @@ data/
 - Markdown rendering with syntax highlighting
 - Mobile-optimized reading experience
 - Reading time, date, tags, and category metadata
+- Interactive isometric line-figure covers ([hairline](https://lucasmarkes.com/lab/hairline) style): every article embeds its own pointer-responsive figure — sources in `hairline-figures/`, standalone pages in `public/hairline/`
 
 ### Services (`/services`)
 

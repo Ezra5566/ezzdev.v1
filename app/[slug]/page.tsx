@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useParams } from "next/navigation";
 import ReactMarkdown from "react-markdown";
 import rehypeHighlight from "rehype-highlight";
@@ -33,6 +33,50 @@ interface Article {
   isLocked?: boolean;
   price?: number;
   status: string;
+}
+
+/** An interactive hairline figure cover: the bench page sized so the whole plate shows. */
+function HairlineCover({ src, title }: { src: string; title: string }) {
+  const frameRef = useRef<HTMLDivElement>(null);
+  const [height, setHeight] = useState(640);
+
+  useEffect(() => {
+    const el = frameRef.current;
+    if (!el) return;
+    const update = () => setHeight(Math.round(el.clientWidth * 0.8 + 180));
+    update();
+    const ro = new ResizeObserver(update);
+    ro.observe(el);
+    return () => ro.disconnect();
+  }, []);
+
+  return (
+    <div className="mb-6">
+      <div
+        ref={frameRef}
+        className="border border-[#262626] overflow-hidden bg-[#0a0a0a]"
+      >
+        <iframe
+          src={`${src}?theme=dark`}
+          title={`Interactive figure: ${title}`}
+          className="w-full block"
+          style={{ height, border: 0 }}
+          loading="lazy"
+          sandbox="allow-scripts"
+        />
+      </div>
+      <div className="flex justify-end mt-2">
+        <a
+          href={src}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="font-mono text-[10px] text-[#737373] hover:text-[#a3e635] transition-colors tracking-widest flex items-center gap-2"
+        >
+          {'// OPEN_FIGURE'} ↗
+        </a>
+      </div>
+    </div>
+  );
 }
 
 export default function ArticlePage() {
@@ -179,17 +223,20 @@ export default function ArticlePage() {
             </div>
           </header>
 
-          {/* Cover Image */}
-          {article.coverImage && (
-            <div className="mb-12 border border-[#262626] overflow-hidden">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                src={article.coverImage}
-                alt={article.title}
-                className="w-full h-auto"
-              />
-            </div>
-          )}
+          {/* Cover Image / Interactive Figure */}
+          {article.coverImage &&
+            (article.coverImage.endsWith(".html") ? (
+              <HairlineCover src={article.coverImage} title={article.title} />
+            ) : (
+              <div className="mb-12 border border-[#262626] overflow-hidden">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src={article.coverImage}
+                  alt={article.title}
+                  className="w-full h-auto"
+                />
+              </div>
+            ))}
 
           {/* Article Content */}
           <div className="prose-custom">

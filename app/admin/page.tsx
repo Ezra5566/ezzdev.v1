@@ -43,6 +43,18 @@ const CATEGORIES = [
   "Programming",
 ];
 
+const HAIRLINE_FIGURES = [
+  "wells",
+  "window",
+  "strata",
+  "surge",
+  "palisade",
+  "piles",
+  "sieve",
+  "ledger",
+  "relays",
+];
+
 const emptyArticle: Omit<Article, "id"> = {
   slug: "",
   title: "",
@@ -360,6 +372,34 @@ export default function AdminPage() {
                       </span>
                     ))}
                   </div>
+                </div>
+
+                {/* Cover Figure / Image */}
+                <div>
+                  <label className="font-mono text-[10px] text-[#737373] tracking-widest block mb-2">
+                    COVER (HAIRLINE FIGURE OR IMAGE PATH):
+                  </label>
+                  <input
+                    type="text"
+                    value={formData.coverImage ?? ""}
+                    onChange={(e) =>
+                      setFormData({
+                        ...formData,
+                        coverImage: e.target.value,
+                      })
+                    }
+                    list="hairline-figure-options"
+                    className="w-full bg-[#0a0a0a] border border-[#262626] text-white font-mono text-sm px-4 py-3 focus:outline-none focus:border-[#a3e635] transition-colors"
+                    placeholder="/hairline/hairline-wells.html"
+                  />
+                  <datalist id="hairline-figure-options">
+                    {HAIRLINE_FIGURES.map((n) => (
+                      <option key={n} value={`/hairline/hairline-${n}.html`} />
+                    ))}
+                  </datalist>
+                  <p className="font-mono text-[10px] text-[#737373] mt-2">
+                    {'// .html paths render as interactive figures; images render as covers; empty = none'}
+                  </p>
                 </div>
 
                 {/* Premium Toggle */}
